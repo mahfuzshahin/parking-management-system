@@ -1,0 +1,112 @@
+
+<div class="container">
+  <div class="row text-center">
+    <h1>Parking Management System</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title" *ngIf="isSave">Add Vehicle</h5>
+          <h5 class="card-title" *ngIf="isUpdate">Update Vehicle</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Vehicle License No</label>
+              <input class="form-control" type="text" [(ngModel)]="vehicle.vehicleLicenseNumber">
+            </div>
+            <div class="col-md-6">
+              <label>Vehicle Type</label>
+              <select class="form-control" [(ngModel)]="vehicle.vehicleType" (change)="types">
+                <option *ngFor="let type of types" [value]="type.name">{{type.name}}</option>
+              </select>
+            </div>
+            <div class="col-md-12">
+              <label>Vehicle Owner Name</label>
+              <input class="form-control" type="text" [(ngModel)]="vehicle.vehicleOwnerName">
+            </div>
+            <div class="col-md-12">
+              <label>Vehicle Owner Phone</label>
+              <input class="form-control" type="text" [(ngModel)]="vehicle.vehicleOwnerPhone">
+            </div>
+            <div class="col-md-6">
+              <label>Status</label>
+              <select class="form-control" [(ngModel)]="vehicle.status">
+                <option [ngValue]="1">In</option>
+                <option [ngValue]="2">Out</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label>Car Owner Address</label>
+              <input class="form-control" type="text" [(ngModel)]="vehicle.carOwnerAddress">
+            </div>
+            <div class="col-md-6">
+              <label>Entry Date</label>
+              <input class="form-control" type="date" [(ngModel)]="vehicle.carEntryDate">
+            </div>
+            <div class="col-md-6">
+              <label>Entry Time</label>
+              <input class="form-control" type="time" [(ngModel)]="vehicle.carEntryTime">
+            </div>
+            <div class="col-md-6">
+              <label>Exit Time</label>
+              <input class="form-control" type="date" [(ngModel)]="vehicle.carExitDate">
+            </div>
+            <div class="col-md-6">
+              <label>Exit Time</label>
+              <input class="form-control" type="time" [(ngModel)]="vehicle.carExitTime">
+            </div>
+            <div class="col-md-6">
+              <label>Parking Charge</label>
+              <input class="form-control" type="number" min="1" [(ngModel)]="vehicle.parkingCharge">
+            </div>
+            <div class="col-md-12">
+              <button class="btn btn-primary float-end" type="submit" *ngIf="isSave" (click)="saveData()">Save</button>
+              <button class="btn btn-success" type="submit" *ngIf="isUpdate" (click)="updateData()">Update</button>
+              <button class="btn btn-danger" type="submit" *ngIf="isUpdate" (click)="cancelData()">Cancel</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Owner Name</th>
+                  <th>Vehicle Type</th>
+                  <th>License No</th>
+                  <th>Entry Time</th>
+                  <th>Exit Time</th>
+                  <th>Status</th>
+                  <th>Edit</th>
+                </tr>
+
+              </thead>
+              <tbody>
+                <tr *ngFor="let vehicle of vehicleDataList">
+                  <td>{{vehicle.vehicleOwnerName}}</td>
+                  <td>{{vehicle.vehicleType}}
+                  </td>
+                  <td>{{vehicle.vehicleLicenseNumber}}</td>
+                  <td>{{vehicle.carEntryTime}}</td>
+                  <td>{{vehicle.carExitTime}}</td>
+                  <td>
+                    <span *ngIf="vehicle.status===1">In</span>
+                    <span *ngIf="vehicle.status===2">Out</span>
+                  </td>
+                  <td>
+                    <button type="submit" class="btn btn-success" (click)="viewVehicle(vehicle)">Edit</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

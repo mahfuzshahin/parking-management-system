@@ -1,0 +1,42 @@
+
+<div class="container">
+  <div class="row text-center">
+    <h1>Dashboard</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total Cars Park</h5>
+          <p class="card-text">{{vehicleDataList.length}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Types of Car</h5>
+          <div class="row">
+            <div class="col-lg-12">
+              <canvas  id="MyChart" class="pie_chart">{{ chart }}</canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Summary of Car Parking Data</h5>
+          <div class="row">
+            <div class="col-lg-12">
+              <canvas  id="LineChart" class="pie_chart">{{ lineChart }}</canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
