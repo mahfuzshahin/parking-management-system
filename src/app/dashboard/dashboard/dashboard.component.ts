@@ -3,6 +3,7 @@ import {VehicleService} from "../../service/vehicle.service";
 import {Vehicle} from "../../model/vehicle";
 import {Chart, registerables} from "chart.js";
 import {Title} from "@angular/platform-browser";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +14,9 @@ export class DashboardComponent implements OnInit {
   vehicle = new Vehicle();
 
   vehicleDataList: any = [];
+  microBus: any = [];
+  car: any = [];
+  truck: any = [];
   public chart: any;
   public lineChart: any;
   constructor(private service: VehicleService,
@@ -28,15 +32,25 @@ export class DashboardComponent implements OnInit {
     const today = new Date().toLocaleDateString()
     console.log(today)
     this.vehicleDataList = this.service.getData('vehicleList');
-    // this.vehicleDataList = this.vehicleDataList.filter((item:any)=> item.carEntryDate=== today)
+    const currentTime = new Date();
+    const hours = currentTime.getHours();
+    const minutes = currentTime.getMinutes();
+    const seconds = currentTime.getSeconds();
+    const Time = `${hours}:${minutes}:${seconds}`;
+    const Time2 = `${hours+2}:${minutes}:${seconds}`;
+
+    this.microBus = this.vehicleDataList.filter((item:any)=> item.vehicleType === 'Microbus' && item.carExitTime >= Time && item.carExitTime <= Time2)
+    this.car = this.vehicleDataList.filter((item:any)=> item.vehicleType === 'Car' && item.carExitTime >= Time && item.carExitTime <= Time2)
+    this.truck = this.vehicleDataList.filter((item:any)=> item.vehicleType === 'Truck' && item.carExitTime >= Time && item.carExitTime <= Time2)
 
   }
+
   createPieChart(){
     this.chart = new Chart("MyChart", {
       type: 'pie',
       data: {
         datasets: [{
-          data: [this.vehicleDataList.length, 13, 20],
+          data: [10, 13, 20],
           backgroundColor: ["rgba(242, 85, 33, .9)", "rgba(138,53,25,0.7)", "rgba(184,91,61,0.5)"],
           hoverBackgroundColor: ["rgba(242, 85, 33, .9)", "rgba(242, 85, 33, .7)", "rgba(241,78,25,0.5)"]
         }],

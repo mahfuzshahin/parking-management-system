@@ -5,6 +5,10 @@ import {DashboardComponent} from "./dashboard/dashboard/dashboard.component";
 
 const routes: Routes = [
   {
+    path: '',
+    component: DashboardComponent
+  },
+  {
     path: 'vehicle-parking',
     component: VehicleParkingComponent
   },
